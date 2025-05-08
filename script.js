@@ -1,25 +1,23 @@
-// script.js
-
 function convertToRoman(num) {
-    // Define Roman numeral symbols and their corresponding values
     const romanSymbols = [
         ['M', 1000],
+        ['CM', 900],
         ['D', 500],
+        ['CD', 400],
         ['C', 100],
+        ['XC', 90],
         ['L', 50],
+        ['XL', 40],
         ['X', 10],
+        ['IX', 9],
         ['V', 5],
+        ['IV', 4],
         ['I', 1]
     ];
 
-    // Initialize the result string
     let result = '';
 
-    // Iterate over the romanSymbols array
-    for (let i = 0; i < romanSymbols.length; i++) {
-        const [symbol, value] = romanSymbols[i];
-
-        // Determine the number of times the symbol should be used
+    for (let [symbol, value] of romanSymbols) {
         while (num >= value) {
             result += symbol;
             num -= value;
@@ -30,19 +28,19 @@ function convertToRoman(num) {
 }
 
 function convertNumber() {
-    // Get the user input
     const inputNumber = parseInt(document.getElementById('numberInput').value, 10);
     const resultElement = document.getElementById('result');
 
-    // Check for valid input
     if (isNaN(inputNumber) || inputNumber < 0 || inputNumber > 100000) {
         resultElement.textContent = 'Please enter a number between 0 and 100000.';
         return;
     }
 
-    // Compute the Roman numeral
-    const result = convertToRoman(inputNumber);
+    if (inputNumber === 0) {
+        resultElement.textContent = 'N/A (Romans did not have a numeral for 0)';
+        return;
+    }
 
-    // Display the result
+    const result = convertToRoman(inputNumber);
     resultElement.textContent = result;
 }
